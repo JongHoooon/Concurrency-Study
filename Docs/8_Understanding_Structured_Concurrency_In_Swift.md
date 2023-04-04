@@ -41,11 +41,13 @@ Task {
     }
 } 
 ```
-<img src= "/Docs/images/1.png" width = "50%">
+<img src = "/Docs/images/1.png" width = "50%">
 
 <br>
 
 ## Group Tasks
+
+group에 넣어 모든 작업이 concurrent하게 동작
 
 ```swift
 let ids = [1, 2, 3, 4, 5]
@@ -75,4 +77,7 @@ Task {
 }
 ```
 
-<img scr = "/Docs/images/2.png" >
+<img src = "/Docs/images/2.png">
+
+<br>
+
