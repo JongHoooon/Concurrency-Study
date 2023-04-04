@@ -204,3 +204,11 @@ func getSoucesRx() async {
     }
 }
 ```
+
+<br>
+<br>
+
+## 참고 
+
+- [Mohammad Azam - Concurrency in Swift](https://www.udemy.com/course/asyncawait-and-actors-concurrency-in-swift/)
+- [RxSwift Documentation](https://github.com/ReactiveX/RxSwift/blob/main/Documentation/SwiftConcurrency.md)

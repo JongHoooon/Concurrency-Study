@@ -22,6 +22,7 @@ let experianCrediScore = try? JSONDecoder().decode(CreditScore.self, from: try a
 
 ## Async-let in a Loop 
 
+equifax, experian은 concurrent하게 실행되고 id에 대한 작업은 순차적으로 진행된다.
 
 ```swift
 let ids = [1, 2, 3, 4, 5]
@@ -41,3 +42,37 @@ Task {
 } 
 ```
 <img src= "/Docs/images/1.png" width = "50%">
+
+<br>
+
+## Group Tasks
+
+```swift
+let ids = [1, 2, 3, 4, 5]
+
+func getAPRForAllUsers(ids: [Int]) async throws -> [Int: Double] {
+    
+    var userAPR: [Int: Double] = [:]
+        
+        try await withThrowingTaskGroup(of: (Int, Double).self, body: { group in
+            for id in ids {
+                group.addTask {
+                    return (id, try await getAPR(userId: id))
+                }
+            }
+            
+            // group을 하나씩 기다린다.
+            for try await (id, apr) in group {
+                userAPR[id] = apr
+            }
+        })
+    return userAPR
+}
+
+Task {
+    let userAPRs = try await getAPRForAllUsers(ids: ids)
+    print(userAPRs)
+}
+```
+
+<img scr = "/Docs/images/2.png" >
