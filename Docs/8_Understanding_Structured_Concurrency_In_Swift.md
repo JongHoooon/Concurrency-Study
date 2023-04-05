@@ -80,4 +80,8 @@ Task {
 <img src = "/Docs/images/2.png">
 
 <br>
+<br>
 
+## 참고 
+
+- [Mohammad Azam - Concurrency in Swift](https://www.udemy.com/course/asyncawait-and-actors-concurrency-in-swift/)

@@ -34,9 +34,9 @@ func calculateAPR(creditScores: [CreditScore]) -> Double {
 
 func getAPR(userId: Int) async throws -> Double {
     
-//    if userId % 2 == 0 {
-//        throw NetworkError.invalidID
-//    }
+    if userId % 2 == 0 {
+        throw NetworkError.invalidID
+    }
     
     guard let equifaxUrl = Constants.Urls.equifax(userId: userId),
           let experianUrl = Constants.Urls.experian(userId: userId) else {
@@ -76,7 +76,7 @@ Task {
 let ids = [1, 2, 3, 4, 5]
 var invalidIds: [Int] = []
 
-/*
+
 Task {
     for id in ids {
         do {
@@ -90,28 +90,28 @@ Task {
     }
     
     print(invalidIds)
-} */
-
-func getAPRForAllUsers(ids: [Int]) async throws -> [Int: Double] {
-    
-    var userAPR: [Int: Double] = [:]
-        
-        try await withThrowingTaskGroup(of: (Int, Double).self, body: { group in
-            for id in ids {
-                group.addTask {
-                    return (id, try await getAPR(userId: id))
-                }
-            }
-            
-            // group을 하나씩 기다린다.
-            for try await (id, apr) in group {
-                userAPR[id] = apr
-            }
-        })
-    return userAPR
 }
 
-Task {
-    let userAPRs = try await getAPRForAllUsers(ids: ids)
-    print(userAPRs)
-}
+//func getAPRForAllUsers(ids: [Int]) async throws -> [Int: Double] {
+//
+//    var userAPR: [Int: Double] = [:]
+//
+//        try await withThrowingTaskGroup(of: (Int, Double).self, body: { group in
+//            for id in ids {
+//                group.addTask {
+//                    return (id, try await getAPR(userId: id))
+//                }
+//            }
+//
+//            // group을 하나씩 기다린다.
+//            for try await (id, apr) in group {
+//                userAPR[id] = apr
+//            }
+//        })
+//    return userAPR
+//}
+//
+//Task {
+//    let userAPRs = try await getAPRForAllUsers(ids: ids)
+//    print(userAPRs)
+//}
